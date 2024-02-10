@@ -1,40 +1,45 @@
 import React from 'react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel, TabIndicator } from '@chakra-ui/react'
-import Title from './Title'
 import './stylesheet.css'
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { IconButton, Icon } from '@chakra-ui/react'
+import { EmailIcon, MoonIcon, SearchIcon } from '@chakra-ui/icons'
+import { FiShoppingCart, FiUser} from "react-icons/fi";
+
 
 const NavBar = () => {
     return (
         <div className='NavBar'>
-            <Title className='navCenter' />
-            <Tabs position="relative" variant="unstyled" className='NavCenter'>
-                <TabList>
-                    <Tab>Shirts</Tab>
-                    <Tab>Pants</Tab>
-                    <Tab>Shoes</Tab>
-                </TabList>
-                <TabIndicator
-                    mt="-1.5px"
-                    height="2px"
-                    bg="blue.500"
-                    borderRadius="1px"
-                />
-                <TabPanels>
-                    <TabPanel>
-                        <p>one!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>two!</p>
-                    </TabPanel>
-                    <TabPanel>
-                        <p>three!</p>
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>
+            <Button className='title' colorScheme='teal' variant='ghost' fontSize={'40px'}>
+                    Polo Shop
+                </Button>
+            <div className='navMiddle'>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Shirts
+                </Button>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Pants
+                </Button>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Shoes
+                </Button>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Home
+                </Button>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Gifts
+                </Button>
+                <Button colorScheme='teal' variant='ghost' fontSize={'15px'}>
+                    Sale
+                </Button>
+            </div>
             <div className='navRight'>
-                <Button colorScheme='blue'>Button</Button>
-                <Button colorScheme='blue'>Button</Button>
+                <IconButton aria-label='Search database' icon={<SearchIcon />} />
+                <IconButton aria-label='Search database' icon={<EmailIcon />} />
+                <IconButton aria-label='Search database' icon={<MoonIcon />} />
+                <div width = '80px' height='80px' className='cart-person'>
+                <Icon as={FiShoppingCart} width={'20px'} height={'20px'}/>
+                <Icon as={FiUser} width={'20px'} height={'20px'}/>
+                </div>
             </div>
         </div>
     )
