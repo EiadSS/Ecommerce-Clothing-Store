@@ -32,6 +32,7 @@
     justify-content: space-between;
     align-items: center;
     width: 80px;
+    color: black;
 }
 .header{
     background-color: rgb(0, 0, 102);
