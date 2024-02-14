@@ -72,7 +72,7 @@
 
 .bg-image {
     background-image: url("/src/utils/images/0206_w_polo_plp_c01_img.webp");
-    height: 603px;
+    height: 950px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -117,19 +117,14 @@
     justify-content: center;
     box-sizing: border-box;
     text-align: center;
-    position: absolute;
     width: 100%;
-    position: fixed;
-    bottom: 0;
 }
 
-
-
-
-
-.overlay{
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.Body{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 100px;
 }
+

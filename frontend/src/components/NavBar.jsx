@@ -1,6 +1,6 @@
 import React from 'react'
 import './stylesheet.css'
-import { Button} from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { IconButton, Icon } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon, EmailIcon, MoonIcon, SearchIcon } from '@chakra-ui/icons'
 import { FiShoppingCart, FiUser } from "react-icons/fi";
