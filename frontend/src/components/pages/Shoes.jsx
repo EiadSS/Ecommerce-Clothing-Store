@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const Shoes = () => {
+
+
+export default function Shoes(){
+  
+  const [products, setProducts] = useState([]);
+  
+  useEffect(() => {
+    fetch("http://localhost:8080/api/products")
+    .then((response) => response.json())
+    .then((data) => {
+      setProducts(data._embedded.users)
+    })
+  }, []);
   return (
-    <div>Shoes</div>
+    <h1>{console.log(products)}</h1>
   )
 }
-
-export default Shoes
