@@ -47,8 +47,8 @@ const NavBar = () => {
             <div className='arrows'>
                 <IconButton left='30px' colorScheme='gray' aria-label='Search database' icon={<ArrowBackIcon width={'25px'} height={'25px'} />} />
                 <div className={'midddleBody'}>
-                    <h1>Polo 2023</h1>
-                    <h1 >By Eiad</h1>
+                    <h1>POLO 2024</h1>
+                    <h1 >By RALPH LAUREN</h1>
                 </div>
                 <IconButton right='30px' colorScheme='gray' aria-label='Search database' icon={<ArrowForwardIcon width={'25px'} height={'25px'} />} />
             </div>
