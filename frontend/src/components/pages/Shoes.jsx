@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardBody, CardFooter, SimpleGrid, Heading, Button, Text} from '@chakra-ui/react'
-import { px } from 'framer-motion';
-
 
 
 export default function Shoes() {
@@ -9,10 +7,10 @@ export default function Shoes() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/products")
+    fetch("http://localhost:8080/api/products/shoes")
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data._embedded.products)
+        setProducts(data)
       })
   }, []);
   return (

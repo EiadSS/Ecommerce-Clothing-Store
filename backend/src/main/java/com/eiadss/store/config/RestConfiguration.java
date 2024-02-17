@@ -1,5 +1,7 @@
 package com.eiadss.store.config;
 
+import com.eiadss.store.entity.Order;
+import com.eiadss.store.entity.Product;
 import com.eiadss.store.entity.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -12,6 +14,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(
             RepositoryRestConfiguration config, CorsRegistry cors) {
-        config.exposeIdsFor(User.class);
+        config.exposeIdsFor(User.class, Product.class, Order.class);
     }
 }
