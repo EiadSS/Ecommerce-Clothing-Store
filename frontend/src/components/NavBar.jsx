@@ -1,36 +1,38 @@
 import React from 'react'
 import './stylesheet.css'
-import { Button } from '@chakra-ui/react'
-import { IconButton, Icon } from '@chakra-ui/react'
-import { ArrowBackIcon, ArrowForwardIcon, EmailIcon, MoonIcon, SearchIcon } from '@chakra-ui/icons'
+import { Button, Link } from '@chakra-ui/react'
+import { IconButton, Icon} from '@chakra-ui/react'
+import { ArrowBackIcon, ArrowForwardIcon, EmailIcon, MoonIcon, SearchIcon} from '@chakra-ui/icons'
 import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ChakraLink} from '@chakra-ui/react'
 
 const NavBar = () => {
     return (
         <div className='bg-image'>
             <div className='NavBar'>
-                <Button className='title' colorScheme='white' variant='ghost' fontSize={'40px'}>
+                <ChakraLink as={ReactRouterLink} to="/" className='title' colorScheme='white' variant='ghost' fontSize={'40px'}>
                     Polo Shop
-                </Button>
+                </ChakraLink>
                 <div className='navMiddle'>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    <ChakraLink as={ReactRouterLink} to="/shirts" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Shirts
-                    </Button>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/pants" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Pants
-                    </Button>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/shoes"colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Shoes
-                    </Button>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Home
-                    </Button>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    </ChakraLink>
+                    <Link colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Gifts
-                    </Button>
-                    <Button colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    </Link>
+                    <Link colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Sale
-                    </Button>
+                    </Link>
                 </div>
                 <div className='navRight'>
                     <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon />} />
