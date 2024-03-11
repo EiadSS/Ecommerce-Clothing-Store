@@ -98,7 +98,7 @@
     position: relative;
     display: flex;
     direction: row;
-    justify-content: space-between;
+    justify-content: center;
     top: 250px;
 }
 
@@ -106,6 +106,11 @@
     font-family: 'Caveat', cursive;
     font-size: 70px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
 }
 
 .footer {
