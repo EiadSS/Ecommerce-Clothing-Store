@@ -5,9 +5,11 @@ import Footer from './components/Footer'
 import './components/stylesheet.css'
 import Home from './components/pages/Home'
 import { Route, Routes } from 'react-router-dom'
-import Shirts from './components/pages/Shirts'
-import Pants from './components/pages/Pants'
 import Shoes from './components/pages/Shoes'
+import ShirtsMen from './components/pages/ShirtsMen'
+import ShirtsWomen from './components/pages/ShirtsWomen'
+import PantsMen from './components/pages/PantsMen'
+import PantsWomen from './components/pages/PantsWomen'
 const App = () => {
   return (
     <div className='overlay'>
@@ -15,8 +17,10 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/shirts' element={<Shirts />} />
-        <Route path='/pants' element={<Pants />} />
+        <Route path='/shirts/men' element={<ShirtsMen />} />
+        <Route path='/shirts/women' element={<ShirtsWomen />} />
+        <Route path='/pants/men' element={<PantsMen />} />
+        <Route path='/pants/women' element={<PantsWomen />} />
         <Route path='/shoes' element={<Shoes />} />
       </Routes>
       <Footer />

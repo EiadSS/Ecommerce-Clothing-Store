@@ -1,8 +1,7 @@
 import React from 'react'
 import './stylesheet.css'
-import { Button, Link } from '@chakra-ui/react'
 import { IconButton, Icon} from '@chakra-ui/react'
-import { ArrowBackIcon, ArrowForwardIcon, EmailIcon, MoonIcon, SearchIcon} from '@chakra-ui/icons'
+import {  EmailIcon, MoonIcon, SearchIcon} from '@chakra-ui/icons'
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink} from '@chakra-ui/react'
@@ -15,11 +14,17 @@ const NavBar = () => {
                     Polo Shop
                 </ChakraLink>
                 <div className='navMiddle'>
-                    <ChakraLink as={ReactRouterLink} to="/shirts" colorScheme='white' variant='ghost' fontSize={'15px'}>
-                        Shirts
+                    <ChakraLink as={ReactRouterLink} to="/shirts/men" colorScheme='white' variant='ghost' fontSize={'15px'}>
+                        Shirts Men
                     </ChakraLink>
-                    <ChakraLink as={ReactRouterLink} to="/pants" colorScheme='white' variant='ghost' fontSize={'15px'}>
-                        Pants
+                    <ChakraLink as={ReactRouterLink} to="/shirts/women" colorScheme='white' variant='ghost' fontSize={'15px'}>
+                        Shirts Women
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/pants/men" colorScheme='white' variant='ghost' fontSize={'15px'}>
+                        Pants Men
+                    </ChakraLink>
+                    <ChakraLink as={ReactRouterLink} to="/pants/women" colorScheme='white' variant='ghost' fontSize={'15px'}>
+                        Pants Women
                     </ChakraLink>
                     <ChakraLink as={ReactRouterLink} to="/shoes"colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Shoes
@@ -27,17 +32,11 @@ const NavBar = () => {
                     <ChakraLink as={ReactRouterLink} to="/" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Home
                     </ChakraLink>
-                    <Link colorScheme='white' variant='ghost' fontSize={'15px'}>
-                        Gifts
-                    </Link>
-                    <Link colorScheme='white' variant='ghost' fontSize={'15px'}>
-                        Sale
-                    </Link>
                 </div>
                 <div className='navRight'>
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon />} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon />} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon className='navRight'/>} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon className='navRight'/>} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon  className='navRight'/>} />
                     <div width='80px' height='80px' className='cart-person'>
                         <Icon as={FiShoppingCart} width={'20px'} height={'20px'} />
                         <Icon as={FiUser} width={'20px'} height={'20px'} />

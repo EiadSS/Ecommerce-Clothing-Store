@@ -3,9 +3,9 @@ import React from 'react'
 import Product from './product'
 
 
-export default function Shirt() {
+export default function ShirtsMen() {
 
   return (
-    <Product type={"shirts"} />
+    <Product type={"shirts/male"} />
   )
 }

@@ -30,7 +30,7 @@ export default function Product({ type }) {
             </CardBody>
             <Divider />
             <CardFooter>
-              <ButtonGroup spacing='100'>
+              <ButtonGroup spacing='50'>
                 <Button  colorScheme='blue'>
                   Add to cart
                 </Button>
