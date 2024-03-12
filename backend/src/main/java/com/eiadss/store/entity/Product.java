@@ -13,29 +13,33 @@ public class Product {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
-    private String description;
+    @Column(name = "picture")
+    private String picture;
     @Column(name = "typeId")
     private int typeId;
     @Column(name = "price")
     private float price;
+    @Column(name = "gender")
+    private int gender;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, int typeId, float price) {
+    public Product(Long id, String name, String description, int typeId, float price, int gender) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.picture = description;
         this.typeId = typeId;
         this.price = price;
+        this.gender = gender;
     }
 
-    public Product(String name, String description, int typeId, float price) {
+    public Product(String name, String description, int typeId, float price, int gender) {
         this.name = name;
-        this.description = description;
+        this.picture = description;
         this.typeId = typeId;
         this.price = price;
+        this.gender = gender;
     }
 
     public Long getId() {
@@ -54,12 +58,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public int getTypeId() {
@@ -78,16 +82,12 @@ public class Product {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-        return getTypeId() == product.getTypeId() && Float.compare(product.getPrice(), getPrice()) == 0 && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getDescription(), product.getDescription());
+    public int getGender() {
+        return gender;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getTypeId(), getPrice());
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     @Override
@@ -95,9 +95,23 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
                 ", typeId=" + typeId +
                 ", price=" + price +
+                ", gender=" + gender +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return getTypeId() == product.getTypeId() && Float.compare(product.getPrice(), getPrice()) == 0 && getGender() == product.getGender() && Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getPicture(), product.getPicture());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getPicture(), getTypeId(), getPrice(), getGender());
+    }
+
 }
