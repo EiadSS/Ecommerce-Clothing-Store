@@ -39,23 +39,43 @@ const Signup = () => {
   const [emailAddress, setEmailAddress] = useState("")
   const [password, setPassword] = useState("")
   const [number, setNumber] = useState("")
-  const [address, serAddress] = useState("")
+  const [address, setAddress] = useState("")
   const [postalCode, setPostalCode] = useState("")
-
+  const [date, setDate] = useState("")
+  const [gender, setGender] = useState()
+  const [postData, setPostData] = useState({});
+  const [error, setError] = useState(null);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
-  const handleFirst = (event) => setFirstName(event.target.value)
+  const handdkeSign = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/users", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: emailAddress,
+          address: address,
+          postalCode: postalCode,
+          userName: userName,
+          dateOfBirth: date,
+          number: number,
+          gender: gender
+        }),
+      });
 
-  const handleLast = (event) => setFirstName(event.target.value)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  };
 
-  const handleUserName = (event) => setFirstName(event.target.value)
-
-  const handleEmail = (event) => setEmailAddress(event.target.value)
-
-  const handdkeSign = () => {
-
-  }
   return (
     <Flex
       flexDirection="column"
@@ -85,9 +105,9 @@ const Signup = () => {
 
               <FormControl>
                 <InputGroup>
-                  <Input value = {firstName} onChange={handleFirst} placeholder="First Name" />
-                  <Input value = {lastName} onChange={handleLast} placeholder="Last Name" />
-                  <Input value = {userName} onChange={handleUserName} placeholder="User name" />
+                  <Input value={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First Name" />
+                  <Input value={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last Name" />
+                  <Input value={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -99,7 +119,7 @@ const Signup = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input value = {emailAddress} onChange={handleEmail} type="email" placeholder="email address" />
+                  <Input value={emailAddress} onChange={(event) => setEmailAddress(event.target.value)} type="email" placeholder="email address" />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -112,6 +132,7 @@ const Signup = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -122,29 +143,38 @@ const Signup = () => {
               </FormControl>
               <FormControl>
                 <InputGroup>
-                  <Input placeholder="Number" />
+                  <Input placeholder="Number" onChange={(event) => setNumber(event.target.value)} />
+                  <Input
+                    placeholder="Select Date and Time"
+                    size="md"
+                    type="date"
+                    onChange={(event) => setDate(event.target.value)}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
                 <InputGroup>
-                  <Input placeholder="Address" />
-                  <Input placeholder="Postal code" />
+                  <Input placeholder="Address" onChange={(event) => setAddress(event.target.value)} />
+                  <Input placeholder="Postal code" onChange={(event) => setPostalCode(event.target.value)} />
                 </InputGroup>
               </FormControl>
               <FormControl>
                 <Stack direction="row" spacing='10' justifyContent="center">
                   <Menu>
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                      Gender
-                    </MenuButton>
-                    <MenuList>
-                      <MenuItem>Male</MenuItem>
-                      <MenuItem>Female</MenuItem>
-                    </MenuList>
+                    {({ isOpen }) => (
+                      <>
+                        <MenuButton isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon />}>
+                          {isOpen ? 'Close' : 'Open'}
+                        </MenuButton>
+                        <MenuList>
+                          <MenuItem onClick={(event) => setGender("Male")}>Male</MenuItem>
+                          <MenuItem onClick={(event) => setGender("Female")}>Female</MenuItem>
+                        </MenuList>
+                      </>
+                    )}
                   </Menu>
                   <Button
                     borderRadius={0}
-                    type="submit"
                     variant="solid"
                     colorScheme="teal"
                     width="50%"
