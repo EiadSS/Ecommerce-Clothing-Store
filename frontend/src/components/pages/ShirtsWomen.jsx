@@ -1,11 +1,19 @@
 import React from 'react'
 
 import Product from './product'
+import Header from '../Header'
+import NavBar from '../NavBar'
 
 
 export default function ShirtsWomen() {
 
   return (
-    <Product type={"shirts/female"} />
+    <div>
+      <Header />
+      <NavBar />
+      <Product type={"shirts/female"} />
+      <Footer />
+    </div>
+
   )
 }

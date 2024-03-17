@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card, CardBody, Stack, Image, Heading, Text } from '@chakra-ui/react'
 import { useState } from 'react';
+import Header from '../Header';
+import NavBar from '../NavBar';
 const Home = () => {
     const image1 = 'url("/src/utils/images/s7-1501060_alternate10.webp")';
     const image2 = 'url("/src/utils/images/s7-1501060_lifestyle.webp")';
@@ -17,6 +19,9 @@ const Home = () => {
 
     const [image3V, setImage3] = useState(image3);
     return (
+        <div>
+            <Header />
+            <NavBar />
         <div className='Body'>
             <Card maxW='sm' className='card1'>
                 <CardBody>
@@ -73,6 +78,8 @@ const Home = () => {
                 </CardBody>
 
             </Card>
+        </div>
+        <Footer />
         </div>
     )
 }
