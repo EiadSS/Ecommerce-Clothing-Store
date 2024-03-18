@@ -25,8 +25,15 @@ const CFaLock = chakra(FaLock);
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleShowClick = () => setShowPassword(!showPassword);
+
+  const handleLogin = () => {
+    console.log(email)
+    console.log(password)
+  }
 
   return (
     <Flex
@@ -59,7 +66,7 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input type="email" placeholder="email address" onChange={(event) => (setEmail(event.target.value))}/>
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -72,6 +79,7 @@ const Login = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    onChange={(event) => (setPassword(event.target.value))}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -89,6 +97,7 @@ const Login = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
+                onClick={handleLogin}
               >
                 Login
               </Button>

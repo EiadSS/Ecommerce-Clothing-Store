@@ -29,7 +29,7 @@ public class User {
     @Column(name = "dateOfBirth")
     private Date dateOfBirth;
     @Column(name = "number")
-    private int number;
+    private String number;
     @Column(name = "gender")
     private String gender;
 
@@ -39,7 +39,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender, String password) {
+    public User(String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, String number, String gender, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -52,7 +52,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender, String password) {
+    public User(Long id, String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, String number, String gender, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -150,11 +150,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

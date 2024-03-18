@@ -34,4 +34,13 @@ public class UserRestController {
         }
     }
 
+    @GetMapping("/{email}/{password}")
+    public User login(@PathVariable String email, @PathVariable String password){
+        try {
+            return repo.findByEmailAndPassword(email, password);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

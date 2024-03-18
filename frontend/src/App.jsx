@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from './components/Footer'
 import './components/stylesheet.css'
 import Home from './components/pages/Home'
@@ -11,6 +11,11 @@ import PantsWomen from './components/pages/PantsWomen'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
 const App = () => {
+  
+  const [user, setUser] = useState()
+  const [orders, setOrders] = useState()
+  
+  
   return (
     <div className='overlay'>
       <Routes>

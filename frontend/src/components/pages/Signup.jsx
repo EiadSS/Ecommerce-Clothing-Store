@@ -70,7 +70,7 @@ const Signup = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        alert("There is already an account with that email, try logging in")
       }
     } catch (error) {
       console.log(error.message)
@@ -144,7 +144,7 @@ const Signup = () => {
               </FormControl>
               <FormControl>
                 <InputGroup>
-                  <Input placeholder="Number" onChange={(event) => setNumber(event.target.value)} />
+                  <Input placeholder="Phone number" onChange={(event) => setNumber(event.target.value)} />
                   <Input
                     placeholder="Select Date and Time"
                     size="md"
