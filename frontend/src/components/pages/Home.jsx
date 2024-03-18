@@ -3,6 +3,7 @@ import { Card, CardBody, Stack, Image, Heading, Text } from '@chakra-ui/react'
 import { useState } from 'react';
 import Header from '../Header';
 import NavBar from '../NavBar';
+import Footer from '../Footer'
 const Home = () => {
     const image1 = 'url("/src/utils/images/s7-1501060_alternate10.webp")';
     const image2 = 'url("/src/utils/images/s7-1501060_lifestyle.webp")';

@@ -64,7 +64,8 @@ const Signup = () => {
           userName: userName,
           dateOfBirth: date,
           number: number,
-          gender: gender
+          gender: gender,
+          password: password
         }),
       });
 

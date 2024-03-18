@@ -33,10 +33,13 @@ public class User {
     @Column(name = "gender")
     private String gender;
 
+    @Column(name = "password")
+    private String password;
+
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender) {
+    public User(String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,9 +49,10 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.number = number;
         this.gender = gender;
+        this.password = password;
     }
 
-    public User(Long id, String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender) {
+    public User(Long id, String firstName, String lastName, String email, String address, String postalCode, String userName, Date dateOfBirth, int number, String gender, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,6 +63,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.number = number;
         this.gender = gender;
+        this.password = password;
     }
 
     public Long getId() {
@@ -67,6 +72,26 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return getNumber() == user.getNumber() && Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getAddress(), user.getAddress()) && Objects.equals(getPostalCode(), user.getPostalCode()) && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getDateOfBirth(), user.getDateOfBirth()) && Objects.equals(getGender(), user.getGender()) && Objects.equals(getPassword(), user.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getAddress(), getPostalCode(), getUserName(), getDateOfBirth(), getNumber(), getGender(), getPassword());
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -142,18 +167,6 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return getNumber() == user.getNumber() && Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getAddress(), user.getAddress()) && Objects.equals(getPostalCode(), user.getPostalCode()) && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getDateOfBirth(), user.getDateOfBirth()) && Objects.equals(getGender(), user.getGender());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getEmail(), getAddress(), getPostalCode(), getUserName(), getDateOfBirth(), getNumber(), getGender());
-    }
-
-    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -163,9 +176,10 @@ public class User {
                 ", address='" + address + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", userName='" + userName + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
                 ", number=" + number +
                 ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
