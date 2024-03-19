@@ -52,9 +52,9 @@ const NavBar = ({user}) => {
                     </ChakraLink>
                 </div>
                 <div className='navRight'>
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon className='navRight' />} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon className='navRight' />} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon className='navRight' />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon opacity='50%' className='navRight' />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon opacity='50%'  className='navRight' />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon opacity='50%'  className='navRight' />} />
                     <div width='80px' height='80px' className='cart-person'>
                         <Icon as={FiShoppingCart} width={'20px'} height={'20px'} onClick={handleShop}/>
                         <Icon as={FiUser} width={'20px'} height={'20px'} onClick={handleUser}/>

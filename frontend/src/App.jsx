@@ -13,6 +13,7 @@ import Cart from './components/pages/Cart'
 import User from './components/pages/User'
 
 
+
 const App = () => {
 
   const [user, setUser] = useState()
@@ -22,12 +23,12 @@ const App = () => {
   return (
     <div className='overlay'>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/shirts/men' element={<ShirtsMen />} />
-        <Route path='/shirts/women' element={<ShirtsWomen />} />
-        <Route path='/pants/men' element={<PantsMen />} />
-        <Route path='/pants/women' element={<PantsWomen />} />
-        <Route path='/shoes' element={<Shoes />} />
+        <Route path='/' element={<Home user={user}/>} />
+        <Route path='/shirts/men' element={<ShirtsMen user={user}/>} />
+        <Route path='/shirts/women' element={<ShirtsWomen user={user}/>} />
+        <Route path='/pants/men' element={<PantsMen user={user}/>} />
+        <Route path='/pants/women' element={<PantsWomen user={user}/>} />
+        <Route path='/shoes' element={<Shoes user={user}/>} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Signup setUser={setUser}/>} />
         <Route path='/cart' element={<Cart />} />

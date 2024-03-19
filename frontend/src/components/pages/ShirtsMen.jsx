@@ -6,13 +6,13 @@ import NavBar from '../NavBar'
 import Footer from '../Footer'
 
 
-export default function ShirtsMen() {
+export default function ShirtsMen({user}) {
 
   return (
 
     <div>
       <Header />
-      <NavBar />
+      <NavBar user={user}/>
       <Product type={"shirts/male"} />
       <Footer />
     </div>

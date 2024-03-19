@@ -76,8 +76,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    animation-delay: 10s;
-    animation: change 10s infinite ease-in-out;
+    animation: change 20s infinite ease-in-out alternate;
 }
 
 @keyframes change {
@@ -85,14 +84,26 @@
         background-image: url("/src/utils/images/0130_boys_american_in_paris_plp_c01_img.jpg");
     }
 
-    50% {
+    20% {
+        background-image: url("/src/utils/images/0130_boys_american_in_paris_plp_c01_img.jpg");
+    }
+
+    40% {
         background-image: url("/src/utils/images/1228_w_polo_plp_c01_img.jpg");
     }
 
+    60% {
+        background-image: url("/src/utils/images/1228_w_polo_plp_c01_img.jpg");
+    }
+
+    80% {
+        background-image: url("/src/utils/images/0206_w_polo_plp_c01_img.webp");
+    }
     100% {
         background-image: url("/src/utils/images/0206_w_polo_plp_c01_img.webp");
     }
 }
+
 
 .arrows {
     position: relative;
