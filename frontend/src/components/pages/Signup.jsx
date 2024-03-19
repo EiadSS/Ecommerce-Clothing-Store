@@ -23,7 +23,7 @@ import {
   MenuItem,
 } from '@chakra-ui/react'
 
-import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
 import { FaUserAlt, FaLock } from "react-icons/fa";
@@ -43,9 +43,7 @@ const Signup = () => {
   const [postalCode, setPostalCode] = useState("")
   const [date, setDate] = useState("")
   const [gender, setGender] = useState()
-  const [postData, setPostData] = useState({});
-  const [error, setError] = useState(null);
-
+  const history = useNavigate();
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handdkeSign = async () => {
@@ -68,9 +66,10 @@ const Signup = () => {
           password: password
         }),
       });
-
       if (!response.ok) {
         alert("There is already an account with that email, try logging in")
+      } else {
+        history('/')
       }
     } catch (error) {
       console.log(error.message)

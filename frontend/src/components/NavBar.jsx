@@ -1,10 +1,10 @@
 import React from 'react'
 import './stylesheet.css'
-import { IconButton, Icon} from '@chakra-ui/react'
-import {  EmailIcon, MoonIcon, SearchIcon} from '@chakra-ui/icons'
+import { IconButton, Icon } from '@chakra-ui/react'
+import { EmailIcon, MoonIcon, SearchIcon } from '@chakra-ui/icons'
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { Link as ChakraLink} from '@chakra-ui/react'
+import { Link as ChakraLink } from '@chakra-ui/react'
 
 const NavBar = () => {
     return (
@@ -26,7 +26,7 @@ const NavBar = () => {
                     <ChakraLink as={ReactRouterLink} to="/pants/women" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Pants Women
                     </ChakraLink>
-                    <ChakraLink as={ReactRouterLink} to="/shoes"colorScheme='white' variant='ghost' fontSize={'15px'}>
+                    <ChakraLink as={ReactRouterLink} to="/shoes" colorScheme='white' variant='ghost' fontSize={'15px'}>
                         Shoes
                     </ChakraLink>
                     <ChakraLink as={ReactRouterLink} to="/" colorScheme='white' variant='ghost' fontSize={'15px'}>
@@ -34,9 +34,9 @@ const NavBar = () => {
                     </ChakraLink>
                 </div>
                 <div className='navRight'>
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon className='navRight'/>} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon className='navRight'/>} />
-                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon  className='navRight'/>} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<SearchIcon className='navRight' />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon className='navRight' />} />
+                    <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon className='navRight' />} />
                     <div width='80px' height='80px' className='cart-person'>
                         <Icon as={FiShoppingCart} width={'20px'} height={'20px'} />
                         <Icon as={FiUser} width={'20px'} height={'20px'} />

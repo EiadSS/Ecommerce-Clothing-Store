@@ -31,7 +31,7 @@ export default function Product({ type }) {
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='50'>
-                <Button  colorScheme='blue'>
+                <Button colorScheme='blue'>
                   Add to cart
                 </Button>
                 <Text color='blue.600' fontSize='2xl'>

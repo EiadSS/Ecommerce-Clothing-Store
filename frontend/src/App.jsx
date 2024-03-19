@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Footer from './components/Footer'
 import './components/stylesheet.css'
 import Home from './components/pages/Home'
 import { Route, Routes } from 'react-router-dom'
@@ -11,11 +10,11 @@ import PantsWomen from './components/pages/PantsWomen'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
 const App = () => {
-  
+
   const [user, setUser] = useState()
   const [orders, setOrders] = useState()
-  
-  
+
+
   return (
     <div className='overlay'>
       <Routes>
@@ -25,7 +24,7 @@ const App = () => {
         <Route path='/pants/men' element={<PantsMen />} />
         <Route path='/pants/women' element={<PantsWomen />} />
         <Route path='/shoes' element={<Shoes />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login user={user} setUser={setUser} />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>

@@ -16,24 +16,38 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-
+import { useNavigate } from 'react-router-dom'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const Login = () => {
+const Login = ({ user, setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
   const handleShowClick = () => setShowPassword(!showPassword);
+  const history = useNavigate();
 
   const handleLogin = () => {
-    console.log(email)
-    console.log(password)
-  }
+    fetch("http://localhost:8080/api/users/" + email + '/' + password)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+        console.log(data)
+        history("/")
+      })
+      .catch((error) => {
+        alert("No account matching the provided email and password was found. Try again or make an account")
+      });
+  };
+
 
   return (
     <Flex
@@ -66,7 +80,7 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" onChange={(event) => (setEmail(event.target.value))}/>
+                  <Input type="email" placeholder="email address" onChange={(event) => (setEmail(event.target.value))} />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -93,7 +107,6 @@ const Login = () => {
               </FormControl>
               <Button
                 borderRadius={0}
-                type="submit"
                 variant="solid"
                 colorScheme="teal"
                 width="full"
