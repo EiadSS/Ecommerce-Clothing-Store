@@ -3,10 +3,28 @@ import './stylesheet.css'
 import { IconButton, Icon } from '@chakra-ui/react'
 import { EmailIcon, MoonIcon, SearchIcon } from '@chakra-ui/icons'
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
-const NavBar = () => {
+const NavBar = ({user}) => {
+    const history = useNavigate();
+    const handleShop = () => {
+        console.log(user)
+        if(user){
+           history("/cart") 
+        }else{
+            history("/login")
+        }
+    }
+
+    const handleUser = () => {
+        if(user){
+            history("/user") 
+        }else{
+            history("/login")
+        }
+    }
+
     return (
         <div className='bg-image'>
             <div className='NavBar'>
@@ -38,8 +56,8 @@ const NavBar = () => {
                     <IconButton colorScheme='white' aria-label='Search database' icon={<EmailIcon className='navRight' />} />
                     <IconButton colorScheme='white' aria-label='Search database' icon={<MoonIcon className='navRight' />} />
                     <div width='80px' height='80px' className='cart-person'>
-                        <Icon as={FiShoppingCart} width={'20px'} height={'20px'} />
-                        <Icon as={FiUser} width={'20px'} height={'20px'} />
+                        <Icon as={FiShoppingCart} width={'20px'} height={'20px'} onClick={handleShop}/>
+                        <Icon as={FiUser} width={'20px'} height={'20px'} onClick={handleUser}/>
                     </div>
                 </div>
             </div>

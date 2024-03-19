@@ -23,7 +23,7 @@ import { Link as ChakraLink } from '@chakra-ui/react'
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const Login = ({ user, setUser }) => {
+const Login = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -40,7 +40,6 @@ const Login = ({ user, setUser }) => {
       })
       .then((data) => {
         setUser(data);
-        console.log(data)
         history("/")
       })
       .catch((error) => {
@@ -121,7 +120,11 @@ const Login = ({ user, setUser }) => {
       <Box>
         New to us?{" "}
         <ChakraLink as={ReactRouterLink} to="/signup" colorScheme='white' variant='ghost' color="teal.500">
-          Sign up
+          Sign up.{" "}   
+        </ChakraLink>
+        or {" "}
+        <ChakraLink as={ReactRouterLink} to="/" colorScheme='white' variant='ghost' color="teal.500">
+          Take me back home!
         </ChakraLink>
       </Box>
     </Flex>

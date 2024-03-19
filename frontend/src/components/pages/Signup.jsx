@@ -31,7 +31,7 @@ import { FaUserAlt, FaLock } from "react-icons/fa";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const Signup = () => {
+const Signup = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -69,6 +69,20 @@ const Signup = () => {
       if (!response.ok) {
         alert("There is already an account with that email, try logging in")
       } else {
+        setUser(
+          {
+            firstName: firstName,
+            lastName: lastName,
+            email: emailAddress,
+            address: address,
+            postalCode: postalCode,
+            userName: userName,
+            dateOfBirth: date,
+            number: number,
+            gender: gender,
+            password: password
+          }
+        )
         history('/')
       }
     } catch (error) {
@@ -192,7 +206,11 @@ const Signup = () => {
       <Box>
         already have an account?{" "}
         <ChakraLink as={ReactRouterLink} to="/login" colorScheme='white' variant='ghost' color="teal.500">
-          Login
+          Login. {" "}
+        </ChakraLink>
+        or {" "}
+        <ChakraLink as={ReactRouterLink} to="/" colorScheme='white' variant='ghost' color="teal.500">
+          Take me back home!
         </ChakraLink>
       </Box>
     </Flex>

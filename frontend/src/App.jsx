@@ -9,6 +9,10 @@ import PantsMen from './components/pages/PantsMen'
 import PantsWomen from './components/pages/PantsWomen'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
+import Cart from './components/pages/Cart'
+import User from './components/pages/User'
+
+
 const App = () => {
 
   const [user, setUser] = useState()
@@ -24,8 +28,10 @@ const App = () => {
         <Route path='/pants/men' element={<PantsMen />} />
         <Route path='/pants/women' element={<PantsWomen />} />
         <Route path='/shoes' element={<Shoes />} />
-        <Route path='/login' element={<Login user={user} setUser={setUser} />} />
-        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login setUser={setUser} />} />
+        <Route path='/signup' element={<Signup setUser={setUser}/>} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/user' element={<User />} />
       </Routes>
     </div>
   )
