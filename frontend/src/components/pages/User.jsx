@@ -20,12 +20,19 @@ import {
   TabPanel,
   TabPanels
 } from "@chakra-ui/react";
-import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
-const User = ({ user }) => {
-  
+const User = ({ user, setUser }) => {
+
+  const histroy = useNavigate()
+
   const [products, setProducts] = useState([]);
+
+  const handleOut = () =>{
+    histroy('/')
+    setUser(null)
+  }
 
   useEffect(() => {
     fetch("http://localhost:8080/api/orders/user/" + user.id)
@@ -51,7 +58,18 @@ const User = ({ user }) => {
         alignItems="center"
       >
         <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome {user.firstName}</Heading>
+       <Flex justifyContent="space-between" width="350px">
+          <Heading color="teal.400">Welcome {user.firstName} </Heading>
+          <Button
+            borderRadius={0}
+            variant="solid"
+            colorScheme="teal"
+            width="20"
+            onClick={handleOut}
+          >
+            Sign Out
+          </Button>
+       </Flex>
         <Tabs align="center">
           <TabList>
             <Tab>Orders</Tab>
