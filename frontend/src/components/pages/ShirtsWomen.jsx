@@ -10,7 +10,7 @@ export default function ShirtsWomen({user}) {
 
   return (
     <div>
-      <Header />
+      <Header user={user}/>
       <NavBar user={user}/>
       <Product type={"shirts/female"} />
       <Footer />

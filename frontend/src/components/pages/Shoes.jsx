@@ -6,7 +6,7 @@ import Footer from "../Footer";
 export default function Shoes({user}) {
   return (
     <div>
-      <Header />
+      <Header user={user}/>
       <NavBar user={user}/>
       <Product type={"shoes"} />
       <Footer />

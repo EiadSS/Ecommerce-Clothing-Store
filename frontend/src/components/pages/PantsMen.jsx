@@ -8,7 +8,7 @@ export default function PantsMen({user}) {
 
   return (
     <div>
-      <Header />
+      <Header user={user}/>
       <NavBar user={user}/>
       <Product type={"pants/male"} />
       <Footer />

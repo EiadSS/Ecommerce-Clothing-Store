@@ -2,6 +2,7 @@ package com.eiadss.store.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +14,9 @@ public class Order {
     private Long id;
     @Column(name = "userId")
     private int userId;
-    @Column(name = "productId")
-    private int productId;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date")
+    private Date date;
     @Column(name = "methodOfPayment")
     private int methodOfPayment;
     @Column(name = "shippingAddress")
@@ -26,18 +28,18 @@ public class Order {
 
     }
 
-    public Order(Long id, int userId, int productId, int methodOfPayment, String shippingAddress, String billingAddress) {
+    public Order(Long id, int userId, Date date, int methodOfPayment, String shippingAddress, String billingAddress) {
         this.id = id;
         this.userId = userId;
-        this.productId = productId;
+        this.date = date;
         this.methodOfPayment = methodOfPayment;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
     }
 
-    public Order(int userId, int productId, int methodOfPayment, String shippingAddress, String billingAddress) {
+    public Order(int userId, Date date, int methodOfPayment, String shippingAddress, String billingAddress) {
         this.userId = userId;
-        this.productId = productId;
+        this.date = date;
         this.methodOfPayment = methodOfPayment;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
@@ -59,12 +61,12 @@ public class Order {
         this.userId = userId;
     }
 
-    public int getProductId() {
-        return productId;
+    public Date getDate() {
+        return this.date;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getMethodOfPayment() {
@@ -95,12 +97,12 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
-        return getUserId() == order.getUserId() && getProductId() == order.getProductId() && getMethodOfPayment() == order.getMethodOfPayment() && Objects.equals(getId(), order.getId()) && Objects.equals(getShippingAddress(), order.getShippingAddress()) && Objects.equals(getBillingAddress(), order.getBillingAddress());
+        return getUserId() == order.getUserId() && getMethodOfPayment() == order.getMethodOfPayment() && Objects.equals(getId(), order.getId()) && Objects.equals(getDate(), order.getDate()) && Objects.equals(getShippingAddress(), order.getShippingAddress()) && Objects.equals(getBillingAddress(), order.getBillingAddress());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getProductId(), getMethodOfPayment(), getShippingAddress(), getBillingAddress());
+        return Objects.hash(getId(), getUserId(), getDate(), getMethodOfPayment(), getShippingAddress(), getBillingAddress());
     }
 
     @Override
@@ -108,7 +110,7 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", productId=" + productId +
+                ", date=" + date +
                 ", methodOfPayment=" + methodOfPayment +
                 ", shippingAddress='" + shippingAddress + '\'' +
                 ", billingAddress='" + billingAddress + '\'' +

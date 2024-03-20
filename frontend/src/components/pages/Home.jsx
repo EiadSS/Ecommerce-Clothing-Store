@@ -21,7 +21,7 @@ const Home = ({ user }) => {
     const [image3V, setImage3] = useState(image3);
     return (
         <div>
-            <Header />
+            <Header user={user}/>
             <NavBar user={user}/>
             <div className='Body'>
                 <Card maxW='sm' className='card1'>

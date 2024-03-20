@@ -20,6 +20,17 @@ import {
   TabPanel,
   TabPanels
 } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from '@chakra-ui/react'
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
@@ -29,7 +40,7 @@ const User = ({ user, setUser }) => {
 
   const [products, setProducts] = useState([]);
 
-  const handleOut = () =>{
+  const handleOut = () => {
     histroy('/')
     setUser(null)
   }
@@ -58,7 +69,7 @@ const User = ({ user, setUser }) => {
         alignItems="center"
       >
         <Avatar bg="teal.500" />
-       <Flex justifyContent="space-between" width="350px">
+        <Flex justifyContent="space-between" width="350px">
           <Heading color="teal.400">Welcome {user.firstName} </Heading>
           <Button
             borderRadius={0}
@@ -69,7 +80,7 @@ const User = ({ user, setUser }) => {
           >
             Sign Out
           </Button>
-       </Flex>
+        </Flex>
         <Tabs align="center">
           <TabList>
             <Tab>Orders</Tab>
@@ -77,7 +88,26 @@ const User = ({ user, setUser }) => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              hello
+              <TableContainer>
+                <Table variant='simple'>
+                  <TableCaption>Summary Of Orders Placed</TableCaption>
+                  <Thead>
+                    <Tr>
+                      <Th>Order Id</Th>
+                      <Th>Products</Th>
+                      <Th>Method of Payment</Th>
+                      <Th>Shiping Adress</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>inches</Td>
+                      <Td>millimetres (mm)</Td>
+                      <Td isNumeric>25.4</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </TableContainer>
             </TabPanel>
             <TabPanel>
               <Box minW={{ base: "90%", md: "468px" }}>

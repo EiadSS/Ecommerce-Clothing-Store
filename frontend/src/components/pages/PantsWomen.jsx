@@ -8,7 +8,7 @@ export default function PantsWomen({user}) {
 
   return (
     <>
-      <Header />
+      <Header user={user}/>
       <NavBar user={user}/>
       <Product type={"pants/female"} />
       <Footer />

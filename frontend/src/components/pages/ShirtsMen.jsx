@@ -11,7 +11,7 @@ export default function ShirtsMen({user}) {
   return (
 
     <div>
-      <Header />
+      <Header user={user}/>
       <NavBar user={user}/>
       <Product type={"shirts/male"} />
       <Footer />
