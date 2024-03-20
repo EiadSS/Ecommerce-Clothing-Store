@@ -69,20 +69,20 @@ const Signup = ({ setUser }) => {
       if (!response.ok) {
         alert("There is already an account with that email, try logging in")
       } else {
-        setUser(
-          {
-            firstName: firstName,
-            lastName: lastName,
-            email: emailAddress,
-            address: address,
-            postalCode: postalCode,
-            userName: userName,
-            dateOfBirth: date,
-            number: number,
-            gender: gender,
-            password: password
-          }
-        )
+        fetch("http://localhost:8080/api/users/" + email + '/' + password)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setUser(data);
+            history("/")
+          })
+          .catch((error) => {
+            alert("No account matching the provided email and password was found. Try again or make an account")
+          });
         history('/')
       }
     } catch (error) {

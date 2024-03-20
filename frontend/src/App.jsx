@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './components/stylesheet.css'
 import Home from './components/pages/Home'
 import { Route, Routes } from 'react-router-dom'
@@ -15,10 +15,17 @@ import User from './components/pages/User'
 
 
 const App = () => {
-
-  const [user, setUser] = useState()
   const [orders, setOrders] = useState()
-
+  const [user, setUser] = useState(() => {
+    // Retrieve user from localStorage on initial render
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  
+  // Update localStorage whenever the user state changes
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
 
   return (
     <div className='overlay'>
@@ -32,7 +39,7 @@ const App = () => {
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Signup setUser={setUser}/>} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/user' element={<User />} />
+        <Route path='/user' element={<User user={user}/>} />
       </Routes>
     </div>
   )
