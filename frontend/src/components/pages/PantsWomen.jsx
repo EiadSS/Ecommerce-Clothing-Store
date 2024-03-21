@@ -4,13 +4,13 @@ import Product from './product'
 import NavBar from '../NavBar'
 import Footer from '../Footer'
 
-export default function PantsWomen({user}) {
+export default function PantsWomen({user, setCart}) {
 
   return (
     <>
       <Header user={user}/>
       <NavBar user={user}/>
-      <Product type={"pants/female"} />
+      <Product type={"pants/female"} user={user} setCart={setCart}/>
       <Footer />
     </>
   )

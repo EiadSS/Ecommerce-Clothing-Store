@@ -69,7 +69,7 @@ const Signup = ({ setUser }) => {
       if (!response.ok) {
         alert("There is already an account with that email, try logging in")
       } else {
-        fetch("http://localhost:8080/api/users/" + email + '/' + password)
+        fetch("http://localhost:8080/api/users/" + emailAddress + '/' + password)
           .then((response) => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -77,13 +77,10 @@ const Signup = ({ setUser }) => {
             return response.json();
           })
           .then((data) => {
+            console.log(data)
             setUser(data);
             history("/")
           })
-          .catch((error) => {
-            alert("No account matching the provided email and password was found. Try again or make an account")
-          });
-        history('/')
       }
     } catch (error) {
       console.log(error.message)

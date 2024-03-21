@@ -33,7 +33,7 @@ import { useNavigate } from 'react-router-dom'
 import ProductView from "./ProductView";
 
 
-const User = ({ user, setUser }) => {
+const User = ({ user, setUser, setCart }) => {
 
 
   let payemnt = {
@@ -49,6 +49,7 @@ const User = ({ user, setUser }) => {
   const handleOut = () => {
     histroy('/')
     setUser(null)
+    setCart([])
   }
 
   useEffect(() => {
@@ -90,7 +91,6 @@ const User = ({ user, setUser }) => {
         <Tabs align="center">
           <TabList>
             <Tab>Orders</Tab>
-            <Tab>Profile</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -110,7 +110,7 @@ const User = ({ user, setUser }) => {
                     {products.map((product, index) => (
                       <Tr key={index}>
                         <Td>{product.id}</Td>
-                        <Td><ProductView /></Td>
+                        <Td><ProductView id={product.id}/></Td>
                         <Td>{product.date}</Td>
                         <Td>{product.shippingAddress}</Td>
                         <Td>{payemnt[product.methodOfPayment]}</Td>
@@ -119,56 +119,6 @@ const User = ({ user, setUser }) => {
                   </Tbody>
                 </Table>
               </TableContainer>
-            </TabPanel>
-            <TabPanel>
-              <Box minW={{ base: "90%", md: "468px" }}>
-                <form>
-                  <Stack
-                    spacing={4}
-                    p="1rem"
-                    backgroundColor="whiteAlpha.900"
-                    boxShadow="md"
-                  >
-                    <FormControl>
-                      <InputGroup>
-                        <InputLeftElement
-                          pointerEvents="none"
-
-                        />
-                        <Input type="email" placeholder="email address" onChange={(event) => (setEmail(event.target.value))} />
-                      </InputGroup>
-                    </FormControl>
-                    <FormControl>
-                      <InputGroup>
-                        <InputLeftElement
-                          pointerEvents="none"
-                          color="gray.300"
-                        />
-                        <Input
-                          placeholder="Password"
-                          onChange={(event) => (setPassword(event.target.value))}
-                        />
-                        <InputRightElement width="4.5rem">
-                          <Button h="1.75rem" size="sm">
-                            hello
-                          </Button>
-                        </InputRightElement>
-                      </InputGroup>
-                      <FormHelperText textAlign="right">
-                        <Link>forgot password?</Link>
-                      </FormHelperText>
-                    </FormControl>
-                    <Button
-                      borderRadius={0}
-                      variant="solid"
-                      colorScheme="teal"
-                      width="full"
-                    >
-                      Update
-                    </Button>
-                  </Stack>
-                </form>
-              </Box>
             </TabPanel>
           </TabPanels>
         </Tabs>

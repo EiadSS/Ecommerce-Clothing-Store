@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -8,38 +8,82 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import { useDisclosure, RadioGroup, Stack, Radio, Button } from '@chakra-ui/react'
+import { useDisclosure, Button } from '@chakra-ui/react'
 
-const ProductView = () => {
+import { Card, Stack, Heading, Image, Text, CardBody } from '@chakra-ui/react'
+
+const ProductView = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [scrollBehavior, setScrollBehavior] = React.useState('inside')
-
   const btnRef = React.useRef(null)
+
+  const [bought, setBought] = useState()
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/boughts/order/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        setBought(data);
+        // Loop through each "bought" item and fetch its associated product information
+        const fetchProductPromises = data.map((boughtItem) => {
+          return fetch("http://localhost:8080/api/products/" + boughtItem.productId)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Failed to fetch product data');
+              }
+              return response.json();
+            });
+        });
+        // Wait for all fetch requests to complete
+        Promise.all(fetchProductPromises)
+          .then((productDataArray) => {
+            // Set the fetched product data to the state
+            setProducts(productDataArray);
+          })
+          .catch((error) => {
+            console.error('Error fetching product data:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Error fetching bought data:', error);
+      });
+  }, []); // Add 'id' to the dependency array to refetch when 'id' changes
+
+
   return (
     <>
-      <RadioGroup value={scrollBehavior} onChange={setScrollBehavior}>
-        <Stack direction='row'>
-          <Radio value='inside'>inside</Radio>
-          <Radio value='outside'>outside</Radio>
-        </Stack>
-      </RadioGroup>
-
-      <Button mt={3} ref={btnRef} onClick={onOpen} colorScheme="black">
-        Trigger modal
+      <Button mt={3} ref={btnRef} onClick={onOpen} colorScheme="teal">
+        View Order
       </Button>
 
       <Modal
         onClose={onClose}
         finalFocusRef={btnRef}
         isOpen={isOpen}
-        scrollBehavior={scrollBehavior}
+        scrollBehavior={'inside'}
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Order</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {"hello"}
+            {products.map((product) => (
+              <Card key={product.id} maxW='sm'>
+                <CardBody>
+                  <Image
+                    src={product.picture}
+                    alt={product.name}
+                    borderRadius='lg'
+                  />
+                  <Stack mt='6' spacing='3'>
+                    <Heading size='md'>{product.name}</Heading>
+                    <Text color='blue.600' fontSize='2xl'>
+                      ${product.price}
+                    </Text>
+                  </Stack>
+                </CardBody>
+              </Card>
+            ))}
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>

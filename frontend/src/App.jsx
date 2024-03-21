@@ -15,7 +15,7 @@ import User from './components/pages/User'
 
 
 const App = () => {
-  const [orders, setOrders] = useState()
+  const [cart, setCart] = useState([])
   const [user, setUser] = useState(() => {
     // Retrieve user from localStorage on initial render
     const storedUser = localStorage.getItem('user');
@@ -31,15 +31,15 @@ const App = () => {
     <div className='overlay'>
       <Routes>
         <Route path='/' element={<Home user={user}/>} />
-        <Route path='/shirts/men' element={<ShirtsMen user={user}/>} />
-        <Route path='/shirts/women' element={<ShirtsWomen user={user}/>} />
-        <Route path='/pants/men' element={<PantsMen user={user}/>} />
-        <Route path='/pants/women' element={<PantsWomen user={user}/>} />
-        <Route path='/shoes' element={<Shoes user={user}/>} />
+        <Route path='/shirts/men' element={<ShirtsMen user={user} setCart={setCart}/>} />
+        <Route path='/shirts/women' element={<ShirtsWomen user={user} setCart={setCart}/>} />
+        <Route path='/pants/men' element={<PantsMen user={user} setCart={setCart}/>} />
+        <Route path='/pants/women' element={<PantsWomen user={user} setCart={setCart}/>} />
+        <Route path='/shoes' element={<Shoes user={user} setCart={setCart}/>} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Signup setUser={setUser}/>} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/user' element={<User user={user} setUser={setUser}/>} />
+        <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
+        <Route path='/user' element={<User user={user} setUser={setUser} setCart={setCart}/>} />
       </Routes>
     </div>
   )
