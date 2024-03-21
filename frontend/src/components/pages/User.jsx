@@ -7,7 +7,6 @@ import {
   InputGroup,
   Stack,
   InputLeftElement,
-  chakra,
   Box,
   Link,
   Avatar,
@@ -18,23 +17,30 @@ import {
   Tab,
   TabList,
   TabPanel,
-  TabPanels
+  TabPanels,
 } from "@chakra-ui/react";
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
-import { Link as ReactRouterLink, useNavigate } from 'react-router-dom'
-import { Link as ChakraLink } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import ProductView from "./ProductView";
+
 
 const User = ({ user, setUser }) => {
+
+
+  let payemnt = {
+    1: "Visa",
+    2: "Master Card",
+    3: "American Express"
+  }
 
   const histroy = useNavigate()
 
@@ -89,22 +95,27 @@ const User = ({ user, setUser }) => {
           <TabPanels>
             <TabPanel>
               <TableContainer>
-                <Table variant='simple'>
+                <Table variant='simple' colorScheme="blackAlpha">
                   <TableCaption>Summary Of Orders Placed</TableCaption>
                   <Thead>
                     <Tr>
                       <Th>Order Id</Th>
                       <Th>Products</Th>
-                      <Th>Method of Payment</Th>
+                      <Th>Date</Th>
                       <Th>Shiping Adress</Th>
+                      <Th>Method of Payment</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>inches</Td>
-                      <Td>millimetres (mm)</Td>
-                      <Td isNumeric>25.4</Td>
-                    </Tr>
+                  <Tbody >
+                    {products.map((product, index) => (
+                      <Tr key={index}>
+                        <Td>{product.id}</Td>
+                        <Td><ProductView /></Td>
+                        <Td>{product.date}</Td>
+                        <Td>{product.shippingAddress}</Td>
+                        <Td>{payemnt[product.methodOfPayment]}</Td>
+                      </Tr>
+                    ))}
                   </Tbody>
                 </Table>
               </TableContainer>
