@@ -6,14 +6,14 @@ import NavBar from '../NavBar'
 import Footer from '../Footer'
 
 
-export default function ShirtsMen({user, setCart}) {
+export default function ShirtsMen({user, setCart, cart}) {
 
   return (
 
     <div>
       <Header user={user}/>
       <NavBar user={user}/>
-      <Product type={"shirts/male"} user={user} setCart={setCart}/>
+      <Product type={"shirts/male"} user={user} setCart={setCart} cart={cart}/>
       <Footer />
     </div>
   )

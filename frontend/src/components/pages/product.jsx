@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody, CardFooter, SimpleGrid, Heading, Button, Text, Stack, Divider, ButtonGroup, Image } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 
-export default function Product({ type, user, setCart }) {
+export default function Product({ type, user, setCart, cart }) {
 
   const history = useNavigate();
 
@@ -18,8 +18,7 @@ export default function Product({ type, user, setCart }) {
 
   function handleAdd(product) {
     if (user) {
-      setCart([...products, product]);
-      console.log(product)
+      setCart([...cart, product]);
     } else {
       history("/login")
     }

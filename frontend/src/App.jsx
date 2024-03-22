@@ -31,11 +31,11 @@ const App = () => {
     <div className='overlay'>
       <Routes>
         <Route path='/' element={<Home user={user}/>} />
-        <Route path='/shirts/men' element={<ShirtsMen user={user} setCart={setCart}/>} />
-        <Route path='/shirts/women' element={<ShirtsWomen user={user} setCart={setCart}/>} />
-        <Route path='/pants/men' element={<PantsMen user={user} setCart={setCart}/>} />
-        <Route path='/pants/women' element={<PantsWomen user={user} setCart={setCart}/>} />
-        <Route path='/shoes' element={<Shoes user={user} setCart={setCart}/>} />
+        <Route path='/shirts/men' element={<ShirtsMen user={user} setCart={setCart} cart={cart}/>} />
+        <Route path='/shirts/women' element={<ShirtsWomen user={user} setCart={setCart} cart={cart}/>} />
+        <Route path='/pants/men' element={<PantsMen user={user} setCart={setCart} cart={cart}/>} />
+        <Route path='/pants/women' element={<PantsWomen user={user} setCart={setCart} cart={cart}/>} />
+        <Route path='/shoes' element={<Shoes user={user} setCart={setCart} cart={cart}/>} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Signup setUser={setUser}/>} />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
