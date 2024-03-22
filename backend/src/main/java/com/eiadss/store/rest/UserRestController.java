@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/users")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://ecommerce-clothing-store-alpha.vercel.app/"})
 public class UserRestController {
 
     public UserRepo repo;
