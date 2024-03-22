@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardBody, CardFooter, SimpleGrid, Heading, Button, Text, Stack, Divider, ButtonGroup, Image } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, SimpleGrid, Heading, Button, Text, Stack, Divider, ButtonGroup, Image, Flex } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 
 export default function Product({ type, user, setCart, cart }) {
@@ -34,6 +34,7 @@ export default function Product({ type, user, setCart, cart }) {
                 src={product.picture}
                 alt='Green double couch with wooden legs'
                 borderRadius='lg'
+                loading='lazy'
               />
               <Stack mt='6' spacing='3'>
                 <Heading size='md'>{product.name}</Heading>
@@ -41,14 +42,14 @@ export default function Product({ type, user, setCart, cart }) {
             </CardBody>
             <Divider />
             <CardFooter>
-              <ButtonGroup spacing='50'>
+              <Flex width="100%" justifyContent="space-around">
                 <Button colorScheme='blue' onClick={() => handleAdd(product)}>
                   Add to cart
                 </Button>
                 <Text color='blue.600' fontSize='2xl'>
                   ${product.price}
                 </Text>
-              </ButtonGroup>
+              </Flex>
             </CardFooter>
           </Card>
         )

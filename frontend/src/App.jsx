@@ -38,7 +38,7 @@ const App = () => {
         <Route path='/shoes' element={<Shoes user={user} setCart={setCart} cart={cart}/>} />
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/signup' element={<Signup setUser={setUser}/>} />
-        <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>} />
+        <Route path='/cart' element={<Cart cart={cart} setCart={setCart} user={user}/>} />
         <Route path='/user' element={<User user={user} setUser={setUser} setCart={setCart}/>} />
       </Routes>
     </div>

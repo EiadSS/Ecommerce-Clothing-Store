@@ -9,7 +9,6 @@ import { Link as ChakraLink } from '@chakra-ui/react'
 const NavBar = ({user}) => {
     const history = useNavigate();
     const handleShop = () => {
-        console.log(user)
         if(user){
            history("/cart") 
         }else{
@@ -29,7 +28,7 @@ const NavBar = ({user}) => {
         <div className='bg-image'>
             <div className='NavBar'>
                 <ChakraLink as={ReactRouterLink} to="/" className='title' colorScheme='white' variant='ghost' fontSize={'40px'}>
-                    Polo Shop
+                    Polo Ralph
                 </ChakraLink>
                 <div className='navMiddle'>
                     <ChakraLink as={ReactRouterLink} to="/shirts/men" colorScheme='white' variant='ghost' fontSize={'15px'}>

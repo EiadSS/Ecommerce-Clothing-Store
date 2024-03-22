@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Card, CardBody, Image, Stack, Text, Button, ButtonG
 import React from 'react'
 import Order from './Order';
 
-const Cart = ({ cart, setCart }) => {
+const Cart = ({ cart, setCart, user }) => {
 
   function handleRemove(itemToRemove) {
     // Filter out the item to remove from the cart array
@@ -17,7 +17,7 @@ const Cart = ({ cart, setCart }) => {
         <Stack align="center" marginTop="20">
           <ButtonGroup alignItems="center" spacing='10' marginBottom="10">
             <Heading color="teal.400">My Cart</Heading>
-            <Order cart={cart}/>
+            <Order cart={cart} user={user} setCart={setCart}/>
           </ButtonGroup>
           <Box>
             <Stack spacing="10">

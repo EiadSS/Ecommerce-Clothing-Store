@@ -12,6 +12,7 @@ import {
   Avatar,
   FormControl,
   InputRightElement,
+  Text
 } from "@chakra-ui/react";
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
@@ -47,6 +48,16 @@ const Signup = ({ setUser }) => {
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handdkeSign = async () => {
+    if (
+      !(password.length >= 8 &&
+        /[A-Z]/.test(password) &&
+        /[a-z]/.test(password) &&
+        /\d/.test(password))
+    ) {
+      // Password meets all the criteria
+      alert("Password must contain:\nat least 8 characters\none or more upper case characters\none or more lower case characters\nat least one number");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:8080/api/users", {
         method: 'POST',
@@ -77,7 +88,6 @@ const Signup = ({ setUser }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data)
             setUser(data);
             history("/")
           })
@@ -152,6 +162,9 @@ const Signup = ({ setUser }) => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
+              <Flex paddingLeft="350">
+                <Text color="teal">Date of Birth</Text>
+              </Flex>
               <FormControl>
                 <InputGroup>
                   <Input placeholder="Phone number" onChange={(event) => setNumber(event.target.value)} />
