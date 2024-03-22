@@ -31,7 +31,7 @@ const Login = ({ setUser }) => {
   const history = useNavigate();
 
   const handleLogin = () => {
-    fetch("http://localhost:8080/api/users/" + email + '/' + password)
+    fetch("https://tasteful-soda-production.up.railway.app/api/users/" + email + '/' + password)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

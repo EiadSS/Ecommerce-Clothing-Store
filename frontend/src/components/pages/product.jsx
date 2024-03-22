@@ -9,7 +9,7 @@ export default function Product({ type, user, setCart, cart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/products/" + type)
+    fetch("https://tasteful-soda-production.up.railway.app/api/products/" + type)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data)

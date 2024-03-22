@@ -59,7 +59,7 @@ const Order = ({ cart, user, setCart }) => {
         // Generate a random order ID
         const orderId = Math.floor(Math.random() * 10000) + 1;
         // Make a POST request to create the order
-        fetch('http://localhost:8080/api/orders', {
+        fetch('https://tasteful-soda-production.up.railway.app/api/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const Order = ({ cart, user, setCart }) => {
                 console.log('Order created successfully:', orderId);
                 // Loop through each item in the cart and make a POST request to record the purchase
                 cart.forEach(product => {
-                    fetch('http://localhost:8080/api/boughts', {
+                    fetch('https://tasteful-soda-production.up.railway.app/api/boughts', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

@@ -53,7 +53,7 @@ const User = ({ user, setUser, setCart }) => {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/orders/user/" + user.id)
+    fetch("https://tasteful-soda-production.up.railway.app/api/orders/user/" + user.id)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data)

@@ -59,7 +59,7 @@ const Signup = ({ setUser }) => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8080/api/users", {
+      const response = await fetch("https://tasteful-soda-production.up.railway.app/api/users", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const Signup = ({ setUser }) => {
       if (!response.ok) {
         alert("There is already an account with that email, try logging in")
       } else {
-        fetch("http://localhost:8080/api/users/" + emailAddress + '/' + password)
+        fetch("https://tasteful-soda-production.up.railway.app/api/users/" + emailAddress + '/' + password)
           .then((response) => {
             if (!response.ok) {
               throw new Error('Network response was not ok');

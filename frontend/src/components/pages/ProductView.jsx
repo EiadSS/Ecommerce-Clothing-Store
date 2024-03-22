@@ -20,13 +20,13 @@ const ProductView = ({ id }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/boughts/order/" + id)
+    fetch("https://tasteful-soda-production.up.railway.app/api/boughts/order/" + id)
       .then((response) => response.json())
       .then((data) => {
         setBought(data);
         // Loop through each "bought" item and fetch its associated product information
         const fetchProductPromises = data.map((boughtItem) => {
-          return fetch("http://localhost:8080/api/products/" + boughtItem.productId)
+          return fetch("https://tasteful-soda-production.up.railway.app/api/products/" + boughtItem.productId)
             .then((response) => {
               if (!response.ok) {
                 throw new Error('Failed to fetch product data');
