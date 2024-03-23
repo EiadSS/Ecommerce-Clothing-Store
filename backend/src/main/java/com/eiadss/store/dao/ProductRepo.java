@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://ecommerce-clothing-store-alpha.vercel.app"})
 public interface ProductRepo extends JpaRepository<Product, Long> {
     List<Product> findByTypeId(int typeId);
     List<Product> findByGender(int gender);
