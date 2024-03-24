@@ -48,8 +48,7 @@ const Home = ({ user }) => {
                             style={{ content: image2V }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
-                            onMouseEnter={() => setImage2(image4)}
-                            onMouseOut={() => setImage2(image3)}
+                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935314001_alternate10?$plpDeskRFAlt$'
                         />
                         <Stack mt='6' spacing='3'>
                             <Heading size='md'>White Polo</Heading>
@@ -66,8 +65,7 @@ const Home = ({ user }) => {
                             style={{ content: image3V }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
-                            onMouseEnter={() => setImage3(image6)}
-                            onMouseOut={() => setImage3(image5)}
+                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211946167001_alternate10?$plpDeskRFAlt$'
                         />
                         <Stack mt='6' spacing='3'>
                             <Heading size='md'>Black Jacket</Heading>
