@@ -5,8 +5,8 @@ import Header from '../Header';
 import NavBar from '../NavBar';
 import Footer from '../Footer'
 const Home = ({ user }) => {
-    const image1 = 'url("/src/utils/images/s7-1501060_alternate10.webp")';
-    const image2 = 'url("/src/utils/images/s7-1501060_lifestyle.webp")';
+    const image1 = 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_alternate10?$plpDeskRFAlt$';
+    const image2 = 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_lifestyle?$plpDeskRF$';
 
     const image3 = 'url("src/utils/images/s7-1474895_alternate10.webp")';
     const image4 = 'url("src/utils/images/s7-1474895_lifestyle.jpg")';
