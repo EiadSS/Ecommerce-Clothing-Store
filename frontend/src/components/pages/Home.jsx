@@ -65,7 +65,7 @@ const Home = ({ user }) => {
                             style={{ content: image3V }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
-                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211946167001_alternate10?$plpDeskRFAlt$'
+                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211949811001_alternate10?$rl_df_pdp_5_7_a10$'
                         />
                         <Stack mt='6' spacing='3'>
                             <Heading size='md'>Black Jacket</Heading>
