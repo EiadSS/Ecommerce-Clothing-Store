@@ -5,29 +5,14 @@ import Header from '../Header';
 import NavBar from '../NavBar';
 import Footer from '../Footer'
 const Home = ({ user }) => {
-    const image1 = 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_alternate10?$plpDeskRFAlt$';
-    const image2 = 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_lifestyle?$plpDeskRF$';
-
-    const image3 = 'url("src/utils/images/s7-1474895_alternate10.webp")';
-    const image4 = 'url("src/utils/images/s7-1474895_lifestyle.jpg")';
-
-    const image5 = 'url("/src/utils/images/s7-1485221_alternate5.webp")';
-    const image6 = 'url("/src/utils/images/s7-1485221_lifestyle.webp")';
-
-    const [image, setImage] = useState(image1);
-
-    const [image2V, setImage2] = useState(image2);
-
-    const [image3V, setImage3] = useState(image3);
     return (
         <div>
-            <Header user={user}/>
-            <NavBar user={user}/>
+            <Header user={user} />
+            <NavBar user={user} />
             <div className='Body'>
                 <Card maxW='sm' className='card1'>
                     <CardBody>
                         <Image className='image1'
-                            style={{ content: image }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
                             src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_alternate10?$plpDeskRFAlt$'
@@ -45,7 +30,6 @@ const Home = ({ user }) => {
                 <Card maxW='sm'>
                     <CardBody>
                         <Image
-                            style={{ content: image2V }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
                             src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935314001_alternate10?$plpDeskRFAlt$'
@@ -62,10 +46,9 @@ const Home = ({ user }) => {
                 <Card maxW='sm'>
                     <CardBody>
                         <Image
-                            style={{ content: image3V }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
-                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211949811001_alternate10?$rl_df_pdp_5_7_a10$'
+                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1470051_alternate10?$plpDeskRF$'
                         />
                         <Stack mt='6' spacing='3'>
                             <Heading size='md'>Black Jacket</Heading>
@@ -74,7 +57,6 @@ const Home = ({ user }) => {
                             </Text>
                         </Stack>
                     </CardBody>
-
                 </Card>
             </div>
             <Footer />
