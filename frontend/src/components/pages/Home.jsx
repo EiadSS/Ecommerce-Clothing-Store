@@ -30,8 +30,7 @@ const Home = ({ user }) => {
                             style={{ content: image }}
                             alt='Green double couch with wooden legs'
                             borderRadius='lg'
-                            onMouseEnter={() => setImage(image2)}
-                            onMouseOut={() => setImage(image1)}
+                            src='https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-AI211935180001_alternate10?$plpDeskRFAlt$'
                         />
                         <Stack mt='6' spacing='3'>
                             <Heading size='md'>Race Jacket</Heading>
