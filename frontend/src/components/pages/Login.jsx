@@ -13,7 +13,8 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
+  Text
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom'
@@ -101,7 +102,13 @@ const Login = ({ setUser }) => {
                   </InputRightElement>
                 </InputGroup>
                 <FormHelperText textAlign="right">
-                  <Link>forgot password?</Link>
+                  <Flex justifyContent="space-between">
+                    <Flex justifyContent="space-between" width="200px">
+                      <Text>demo@gmail.com</Text>
+                      <Text>Demo1234.</Text>
+                    </Flex>
+                    <Link>forgot password?</Link>
+                  </Flex>
                 </FormHelperText>
               </FormControl>
               <Button
