@@ -1,25 +1,12 @@
 import { useState, useEffect } from "react";
 import {
+  Box,
   Flex,
   Heading,
-  Input,
   Button,
-  InputGroup,
-  Stack,
-  InputLeftElement,
-  Box,
-  Link,
   Avatar,
-  FormControl,
-  FormHelperText,
-  InputRightElement,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from "@chakra-ui/react";
-import {
+  HStack,
+  Text,
   Table,
   Thead,
   Tbody,
@@ -28,103 +15,161 @@ import {
   Td,
   TableCaption,
   TableContainer,
-} from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
+  Select,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import ProductView from "./ProductView";
 
-
 const User = ({ user, setUser, setCart }) => {
-
-
-  let payemnt = {
+  const payment = {
     1: "Visa",
     2: "Master Card",
-    3: "American Express"
-  }
+    3: "American Express",
+  };
 
-  const histroy = useNavigate()
-
+  const history = useNavigate();
   const [products, setProducts] = useState([]);
+  const [sortBy, setSortBy] = useState("date-desc"); // default: newest first
 
   const handleOut = () => {
-    histroy('/')
-    setUser(null)
-    setCart([])
-  }
+    history("/");
+    setUser(null);
+    setCart([]);
+  };
+
+  const handleHome = () => {
+    // just navigate, keep user + cart
+    history("/");
+  };
 
   useEffect(() => {
-    fetch("https://tasteful-soda-production.up.railway.app/api/orders/user/" + user.id)
+    if (!user) return;
+    fetch(
+      "https://tasteful-soda-production.up.railway.app/api/orders/user/" +
+        user.id
+    )
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data)
-      })
-  }, []);
+        setProducts(data);
+      });
+  }, [user]);
+
+  if (!user) return null;
+
+  // sort logic
+  const sortedProducts = [...products].sort((a, b) => {
+    switch (sortBy) {
+      case "id-asc":
+        return a.id - b.id;
+      case "id-desc":
+        return b.id - a.id;
+      case "date-asc":
+        return new Date(a.date) - new Date(b.date);
+      case "date-desc":
+      default:
+        return new Date(b.date) - new Date(a.date);
+    }
+  });
 
   return (
-    <Flex
-      flexDirection="column"
-      width="100wh"
-      height="100vh"
-      backgroundColor="gray.200"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Stack
-        flexDir="column"
-        mb="2"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Avatar bg="teal.500" />
-        <Flex justifyContent="space-between" width="350px">
-          <Heading color="teal.400">Welcome {user.firstName} </Heading>
-          <Button
-            borderRadius={0}
-            variant="solid"
-            colorScheme="teal"
-            width="20"
-            onClick={handleOut}
-          >
-            Sign Out
-          </Button>
-        </Flex>
-        <Tabs align="center">
-          <TabList>
-            <Tab>Orders</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <TableContainer>
-                <Table variant='simple' colorScheme="blackAlpha">
-                  <TableCaption>Summary Of Orders Placed</TableCaption>
-                  <Thead>
-                    <Tr>
-                      <Th>Order Id</Th>
-                      <Th>Products</Th>
-                      <Th>Date</Th>
-                      <Th>Shiping Adress</Th>
-                      <Th>Method of Payment</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody >
-                    {products.map((product, index) => (
-                      <Tr key={index}>
-                        <Td>{product.id}</Td>
-                        <Td><ProductView id={product.id}/></Td>
-                        <Td>{product.date}</Td>
-                        <Td>{product.shippingAddress}</Td>
-                        <Td>{payemnt[product.methodOfPayment]}</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Stack>
-    </Flex>
-  )
-}
+    <Box bg="gray.200" minH="100vh" py={10}>
+      <Box maxW="1200px" mx="auto" px={6}>
+        {/* HEADER CARD */}
+        <Box bg="white" borderRadius="md" boxShadow="sm" px={6} py={4} mb={6}>
+          <Flex align="center" justify="space-between">
+            <HStack spacing={3}>
+              <Avatar bg="teal.500" />
+              <Box>
+                <Text fontSize="sm" color="gray.500">
+                  Logged in as
+                </Text>
+                <Heading size="md" color="teal.500">
+                  {user.firstName}
+                </Heading>
+              </Box>
+            </HStack>
 
-export default User
+            <HStack spacing={3}>
+              <Button
+                borderRadius={0}
+                variant="outline"
+                colorScheme="teal"
+                onClick={handleHome}
+              >
+                Home
+              </Button>
+              <Button
+                borderRadius={0}
+                variant="solid"
+                colorScheme="teal"
+                onClick={handleOut}
+              >
+                Sign Out
+              </Button>
+            </HStack>
+          </Flex>
+        </Box>
+
+        {/* ORDERS CARD */}
+        <Box bg="white" borderRadius="md" boxShadow="sm" px={6} py={4}>
+          <Flex justify="space-between" align="center" mb={4}>
+            <Heading size="md">Orders</Heading>
+
+            <HStack spacing={4}>
+              <Text fontSize="sm" color="gray.500">
+                {sortedProducts.length} order
+                {sortedProducts.length !== 1 ? "s" : ""}
+              </Text>
+              <Select
+                size="sm"
+                width="220px"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="date-desc">Date – Newest first</option>
+                <option value="date-asc">Date – Oldest first</option>
+                <option value="id-asc">Order ID – Low to High</option>
+                <option value="id-desc">Order ID – High to Low</option>
+              </Select>
+            </HStack>
+          </Flex>
+
+          <TableContainer
+            w="100%"
+            maxH="70vh"
+            overflowY="auto"
+            overflowX="auto"
+          >
+            <Table variant="simple" size="sm" colorScheme="blackAlpha">
+              <TableCaption>Summary Of Orders Placed</TableCaption>
+              <Thead>
+                <Tr>
+                  <Th>ORDER ID</Th>
+                  <Th>PRODUCTS</Th>
+                  <Th>DATE</Th>
+                  <Th>SHIPPING ADDRESS</Th>
+                  <Th>METHOD OF PAYMENT</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {sortedProducts.map((product) => (
+                  <Tr key={product.id}>
+                    <Td>{product.id}</Td>
+                    <Td>
+                      <ProductView id={product.id} />
+                    </Td>
+                    <Td>{product.date}</Td>
+                    <Td>{product.shippingAddress}</Td>
+                    <Td>{payment[product.methodOfPayment]}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default User;

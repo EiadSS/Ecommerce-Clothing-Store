@@ -1,144 +1,214 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    Input,
-    FormControl,
-    Stack,
-    Select,
-} from '@chakra-ui/react'
-import { useState } from 'react'
-import { useDisclosure } from '@chakra-ui/react'
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Input,
+  FormControl,
+  Stack,
+  Select,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 
 const Order = ({ cart, user, setCart }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [address, setAddress] = useState('');
-    const [payment, setPayment] = useState('');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
-    const parseDate = (dateString) => {
-        // Array of month names to use for parsing
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const [address, setAddress] = useState("");
+  const [payment, setPayment] = useState(""); 
+  const [orderCompleted, setOrderCompleted] = useState(false); 
 
-        // Split the date string into its components
-        const parts = dateString.split(" ");
+  // date as YYYY-MM-DD for SQL
+  const getTodaySqlDate = () => {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
 
-        // Extract day, month, and year from the parts
-        const day = parseInt(parts[2]);
-        const monthIndex = months.findIndex((month) => month === parts[1]);
-        const year = parseInt(parts[3]);
+  const method = {
+    Visa: 1,
+    Mastercard: 2,
+    "American Express": 3,
+  };
 
-        // Construct a string in the format expected by SQL (YYYY-MM-DD)
-        const sqlDateString = `${year}-${(monthIndex + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  const handleAddressChange = (event) => setAddress(event.target.value);
 
-        return sqlDateString;
-    };
+  const handlePaymentChange = (event) => {
+    const cardName = event.target.value;
+    setPayment(method[cardName] || ""); 
+  };
 
-    const method = {
-        "Visa": 1,
-        "Mastercard": 2,
-        "American Express": 3
+  
+  const handleOpen = () => {
+    if (cart.length === 0) {
+      toast({
+        title: "Your cart is empty.",
+        description: "Add at least one item before placing an order.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
+    }
+     setOrderCompleted(false); // 
+    onOpen();
+  };
+
+  const handleTransaction = async () => {
+    // safety double-checks
+    if (cart.length === 0) {
+      toast({
+        title: "Cannot place order.",
+        description: "Your cart is empty.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
     }
 
-    const handleAddressChange = (event) => {
-        const newAddress = event.target.value;
-        setAddress(newAddress);
+    if (!payment) {
+      toast({
+        title: "Select a card type.",
+        description: "Please choose Visa, Mastercard, or American Express.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
     }
 
-    const handlePaymentChange = (event) => {
-        const newPayment = event.target.value;
-        setPayment(method.newPayment);
+    if (!address.trim()) {
+      toast({
+        title: "Enter a shipping address.",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
     }
 
-    const handleTransaction = () => {
-        // Generate a random order ID
-        const orderId = Math.floor(Math.random() * 10000) + 1;
-        // Make a POST request to create the order
-        fetch('https://tasteful-soda-production.up.railway.app/api/orders', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: orderId,
-                userId: user.id,
-                date: parseDate(new Date().toDateString()), // Get the current date
-                methodOfPayment: payment,
-                shippingAddress: address,
-                billingAddress: 'temp',
-            }),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to create order');
-                }
-                console.log('Order created successfully:', orderId);
-                // Loop through each item in the cart and make a POST request to record the purchase
-                cart.forEach(product => {
-                    fetch('https://tasteful-soda-production.up.railway.app/api/boughts', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            orderId: orderId,
-                            productId: product.id,
-                        }),
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Failed to record purchase');
-                            }
-                            console.log('Purchase recorded successfully for product:', product.id);
-                        })
-                        .catch(error => {
-                            console.error('Error recording purchase for product:', product.id, error);
-                        });
-                });
-            })
-            .catch(error => {
-                console.error('Error creating order:', error);
-            });
-        alert("The Transaction was complete thank you :)")
-        setCart([])
-        onClose()
-    };
+    const orderId = Math.floor(Math.random() * 10000) + 1;
 
+    try {
+      // create order
+      const orderRes = await fetch(
+        "https://tasteful-soda-production.up.railway.app/api/orders",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: orderId,
+            userId: user.id,
+            date: getTodaySqlDate(),
+            methodOfPayment: payment, // 1/2/3
+            shippingAddress: address,
+            billingAddress: "temp",
+          }),
+        }
+      );
 
-    return (
-        <>
-            <Button colorScheme='teal' onClick={onOpen}>Finish Transaction</Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Complete Order</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Stack spacing={4}>
-                            <FormControl>
-                                <Input onChange={handleAddressChange} placeholder='Shipping Address' />
-                            </FormControl>
-                            <FormControl>
-                                <Select width='45%' onChange={handlePaymentChange}>
-                                    <option value='Visa'>Visa</option>
-                                    <option value='Mastercard'>Mastercard</option>
-                                    <option value='American Express'>American Express</option>
-                                </Select>
-                            </FormControl>
-                        </Stack>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={handleTransaction} colorScheme='teal'>Complete</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
-    )
-}
+      if (!orderRes.ok) throw new Error("Failed to create order");
 
-export default Order
+      // record each product bought
+      await Promise.all(
+        cart.map((product) =>
+          fetch(
+            "https://tasteful-soda-production.up.railway.app/api/boughts",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                orderId: orderId,
+                productId: product.id,
+              }),
+            }
+          ).then((res) => {
+            if (!res.ok) throw new Error("Failed to record purchase");
+          })
+        )
+      );
+
+      toast({
+        title: "Transaction complete.",
+        description: "Thank you for your purchase!",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+
+      setCart([]);
+      setAddress("");
+      setPayment("");
+      setOrderCompleted(true); 
+      onClose();
+    } catch (error) {
+      console.error("Error creating order:", error);
+      toast({
+        title: "Order failed.",
+        description: "Something went wrong while processing your order.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  };
+
+  return (
+    <>
+    <Button
+        colorScheme="teal"
+        onClick={handleOpen}
+        isDisabled={orderCompleted || cart.length === 0}
+        variant={orderCompleted ? "outline" : "solid"}
+    >
+        {orderCompleted ? "Order Completed" : "Finish Transaction"}
+    </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Complete Order</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack spacing={4}>
+              <FormControl>
+                <Input
+                  value={address}
+                  onChange={handleAddressChange}
+                  placeholder="Shipping Address"
+                />
+              </FormControl>
+              <FormControl>
+                <Select
+                  placeholder="Select card type"
+                  width="45%"
+                  onChange={handlePaymentChange}
+                >
+                  <option value="Visa">Visa</option>
+                  <option value="Mastercard">Mastercard</option>
+                  <option value="American Express">American Express</option>
+                </Select>
+              </FormControl>
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={handleTransaction} colorScheme="teal">
+              Complete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default Order;
